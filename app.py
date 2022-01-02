@@ -108,7 +108,7 @@ def callback():
         #     original_content_url='https://tocfinalproject.herokuapp.com/getpic/' + userID,
         #     preview_image_url='https://tocfinalproject.herokuapp.com/getpic/' + userID
         # )
-        line_bot_api.reply_message(event.reply_token, message)
+        # line_bot_api.reply_message(event.reply_token, message)
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=message)
         ) 
