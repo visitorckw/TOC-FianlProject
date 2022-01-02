@@ -140,10 +140,10 @@ class chessboard (object):
 				foreground = color & 7
 				background = (color >> 4) & 7
 				bold = color & 8
-				sys.stdout.write(" \033[%s3%d;4%dm"%(bold and "01;" or "", foreground, background))
+				# sys.stdout.write(" \033[%s3%d;4%dm"%(bold and "01;" or "", foreground, background))
 				sys.stdout.flush()
 			else:
-				sys.stdout.write(" \033[0m")
+				# sys.stdout.write(" \033[0m")
 				sys.stdout.flush()
 		return 0
 	
@@ -165,15 +165,19 @@ class chessboard (object):
 				elif ch == 1:
 					if (row, col) in self.won:
 						# self.console(9)
+						pass
 					else:
 						# self.console(10)
+						pass
 					print (' O',end='')
-					#self.console(-1)
+					# self.console(-1)
 				elif ch == 2:
 					if (row, col) in self.won:
 						# self.console(9)
+						pass
 					else:
 						# self.console(13)
+						pass
 					print (' X',end='')
 					#self.console(-1)
 			# self.console(-1)
