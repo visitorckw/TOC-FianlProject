@@ -139,19 +139,19 @@ class chessboard (object):
 		return 0
 	
 	def show (self):
-		print (' ABCDEFGHIJKLMNO')
+		print (' A B C D E F G H I J K L M N O')
 		mark = ('. ', 'O ', 'X ')
 		nrow = 0
 		self.check()
 		color1 = 10
 		color2 = 13
 		for row in range(15):
-			print (chr(ord('A') + row),end='')
+			# print (chr(ord('A') + row),end='')
 			for col in range(15):
 				ch = self.__board[row][col]
 				if ch == 0: 
 					# self.console(-1)
-					print ('+', end='')
+					print ('  .', end='')
 				elif ch == 1:
 					if (row, col) in self.won:
 						# self.console(9)
@@ -159,7 +159,7 @@ class chessboard (object):
 					else:
 						# self.console(10)
 						pass
-					print ('O',end='')
+					print (' O',end='')
 					# self.console(-1)
 				elif ch == 2:
 					if (row, col) in self.won:
@@ -168,10 +168,10 @@ class chessboard (object):
 					else:
 						# self.console(13)
 						pass
-					print ('X',end='')
+					print (' X',end='')
 					#self.console(-1)
 			# self.console(-1)
-			print ('')
+			print (chr(ord('A') + row))
 		return 0
 
 
