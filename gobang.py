@@ -161,7 +161,7 @@ class chessboard (object):
 				ch = self.__board[row][col]
 				if ch == 0: 
 					# self.console(-1)
-					print (' .', end='')
+					print ('  .', end='')
 				elif ch == 1:
 					if (row, col) in self.won:
 						# self.console(9)

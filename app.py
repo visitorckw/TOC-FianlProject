@@ -78,6 +78,8 @@ def callback():
         f = open('input.txt', 'w')
         if message != 'new game':
             f.write(message + '\n')
+        else:
+            open(userID + '.txt', 'w').close()
         f.write('q\n')
         f.close()
         os.system('python gobang.py ' + userID + '.txt < input.txt > output.txt')
