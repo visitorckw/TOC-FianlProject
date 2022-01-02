@@ -99,7 +99,7 @@ def callback():
                 data = s[4:]
                 f.close()
                 continue
-            if len(s) >= 9 and s[:9] == 'Your move' and i != len(result) - 1:
+            if len(s) >= 9 and s[:9] == 'Your move' and i <= len(result) - 10:
                 message = ''
                 continue
             message += s
