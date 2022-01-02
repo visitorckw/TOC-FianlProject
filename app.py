@@ -78,9 +78,12 @@ def callback():
             f = open('input.txt', 'w')
             f.write('1 shosboard') 
             f.close()
+            print('before exec')
             os.system('./gnugo --mode gtp < input.txt > output.txt')
+            print('after exec')
             f = open('output.txt', 'r')
             result = f.readlines()
+            f.close()
             message = ''
             for s in result:
                 if len(s) and s[0] == '=':
