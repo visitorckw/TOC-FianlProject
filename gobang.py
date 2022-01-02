@@ -139,7 +139,7 @@ class chessboard (object):
 		return 0
 	
 	def show (self):
-		print (' A B C D E F G H I J K L M N O')
+		print (' A BC D E F G H I J K L M N O')
 		mark = ('. ', 'O ', 'X ')
 		nrow = 0
 		self.check()
