@@ -6,13 +6,13 @@ Playing Gomoku with an AI with line
 
 ### Command
 1. new game
-It will clear the chess board and start a new game
+It will clear the chess board and start a new game  
 2. XY
-XY means the coordinate where you want to play
-if the coordinate is out of the chess board
-the robot will warn you with a bad move
+XY means the coordinate where you want to play  
+if the coordinate is out of the chess board  
+the robot will warn you with a bad move  
 3. quit
-This will end the game
+This will end the game  
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/dc7fa47fcd809b99d087/maintainability)](https://codeclimate.com/github/NCKU-CCS/TOC-Project-2020/maintainability)
 
