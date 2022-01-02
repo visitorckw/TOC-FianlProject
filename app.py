@@ -77,7 +77,7 @@ def callback():
         userID = str(event.source.user_id)
         f = open('input.txt', 'w')
         if message == 'quit' or message == 'q':
-            message = 'Thanks for playing!\n'
+            message = 'Thanks for playing!'
             state[userID] = 'quit'
             line_bot_api.reply_message(
                 event.reply_token, TextSendMessage(text=message)
@@ -112,9 +112,9 @@ def callback():
             if len(s) >= 9 and s[:9] == 'Your move' and i <= len(result) - 10:
                 message = ''
                 continue
-            if len(s) >= 8 and s == 'YOU LOSE':
+            if len(s) >= 8 and s[:8] == 'YOU LOSE':
                 state[userID] = 'lose'
-            if len(s) >= 7 and s == 'YOU WIN':
+            if len(s) >= 7 and s[:7] == 'YOU WIN':
                 state[userID] = 'win'
             message += s
         # pic = draw()
