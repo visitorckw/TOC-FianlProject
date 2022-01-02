@@ -71,9 +71,23 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-
+        message = event.message.text
+        if message == 'play black' or 'play white':
+            player = message
+        if message == 'play black':
+            f = open('input.txt', 'w')
+            f.write('1 shosboard') 
+            f.close()
+            os.system('./gnugo --mode gtp < input.txt > output.txt')
+            f = open('output.txt', 'r')
+            result = f.readlines()
+            message = ''
+            for s in result:
+                if len(s) and s[0] == '=':
+                    continue
+                message += s
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.message.text)
+            event.reply_token, TextSendMessage(text=message)
         )
 
     return "OK"
