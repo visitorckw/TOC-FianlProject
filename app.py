@@ -15,27 +15,6 @@ state = {}
 
 load_dotenv()
 
-# machine = TocMachine(
-#     states=["user", "state1", "state2"],
-#     transitions=[
-#         {
-#             "trigger": "advance",
-#             "source": "user",
-#             "dest": "state1",
-#             "conditions": "is_going_to_state1",
-#         },
-#         {
-#             "trigger": "advance",
-#             "source": "user",
-#             "dest": "state2",
-#             "conditions": "is_going_to_state2",
-#         },
-#         {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
-#     ],
-#     initial="user",
-#     auto_transitions=False,
-#     show_conditions=True,
-# )
 machine = TocMachine(
     states=["new game", "playing", "win", "lose", "quit"],
     transitions=[
@@ -91,16 +70,6 @@ machine = TocMachine(
         },
         {
             "trigger": "quit",
-            "source": "new game",
-            "dest": "quit",
-        },
-        {
-            "trigger": "quit",
-            "source": "playing",
-            "dest": "quit",
-        },
-        {
-            "trigger": "quit",
             "source": "playing",
             "dest": "quit",
         },
@@ -115,7 +84,7 @@ machine = TocMachine(
             "dest": "quit",
         },
     ],
-    initial="new game",
+    initial="quit",
     auto_transitions=False,
     show_conditions=True,
 )
