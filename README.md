@@ -1,8 +1,8 @@
 # TOC Project 2020
 
-## Introduction
-An Gomoku Line Robot
-Playing Gomoku with an AI with line
+## Introduction  
+An Gomoku Line Robot  
+Playing Gomoku with an AI with line  
 
 ### Command
 1. new game  
