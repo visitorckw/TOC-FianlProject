@@ -149,14 +149,14 @@ class chessboard (object):
 	
 	# ��ɫ���
 	def show (self):
-		print ('  ABCDEFGHIJKLMNO')
+		print (' A B C D E F G H I J K L M N O')
 		mark = ('. ', 'O ', 'X ')
 		nrow = 0
 		self.check()
 		color1 = 10
 		color2 = 13
 		for row in range(15):
-			print (chr(ord('A') + row),end='')
+			# print (chr(ord('A') + row),end='')
 			for col in range(15):
 				ch = self.__board[row][col]
 				if ch == 0: 
@@ -181,6 +181,7 @@ class chessboard (object):
 					print ('X',end='')
 					#self.console(-1)
 			# self.console(-1)
+			print (chr(ord('A') + row),end='')
 			print ('')
 		return 0
 

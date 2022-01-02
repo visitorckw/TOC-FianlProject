@@ -88,7 +88,8 @@ def callback():
         f.close()
         message = ''
         data = ''
-        for s in result:
+        for i in range(len(result)):
+            s = result[i]
             if len(s) >= 4 and s[:4] == 'DUMP':
                 filename = userID + '.txt'
                 if not os.path.exists(filename):
@@ -97,6 +98,9 @@ def callback():
                 f.write(s[4:])
                 data = s[4:]
                 f.close()
+                continue
+            if len(s) >= 9 and s[:9] == 'Your move' and i != len(result) - 1:
+                message = ''
                 continue
             message += s
         # pic = draw()
