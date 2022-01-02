@@ -73,6 +73,7 @@ def callback():
             continue
         message = event.message.text
         userID = str(event.source.user_id)
+        print(type(event.source.user_id))
         print('userid = ', userID)
         f = open('input.txt', 'w')
         if message != 'new game':
