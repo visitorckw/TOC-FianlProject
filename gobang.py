@@ -786,7 +786,7 @@ def gamemain():
 		while 1:
 			print ('<ROUND %d>'%(len(history) + 1))
 			b.show()
-			print ('Your move (u:undo, q:quit):',)
+			print ('Your move (q:quit):',)
 			text = input().strip('\r\n\t ')
 			if len(text) == 2:
 				tr = ord(text[0].upper()) - ord('A')
