@@ -9,7 +9,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSend
 
 from fsm import TocMachine
 from utils import send_text_message
-from draw import draw
+# from draw import draw
 
 load_dotenv()
 
@@ -73,19 +73,9 @@ def callback():
             continue
         message = event.message.text
         userID = event.source.userId
-        if message == 'new game':
-            filename = userID + '.txt'
-            open(filename, 'w').close()
-            pic = draw()
-            pic.draw(userID + '.png')
-            message = ImageSendMessage(
-                original_content_url='https://tocfinalproject.herokuapp.com/getpic/' + userID,
-                preview_image_url='https://tocfinalproject.herokuapp.com/getpic/' + userID
-            )
-            line_bot_api.reply_message(event.reply_token, message)
-            continue
         f = open('input.txt', 'w')
-        f.write(message + '\n')
+        if message != 'new game':
+            f.write(message + '\n')
         f.write('q\n')
         f.close()
         os.system('python gobang.py ' + userID + '.txt ' < 'input.txt > output.txt')
@@ -105,21 +95,21 @@ def callback():
                 f.close()
                 continue
             message += s
-        pic = draw()
-        for i in range(0, len(data), 5):
-            if data[i] == '1':
-                pic.black.append(pic.trans(s[i+2], s[i+3]))
-            else:
-                pic.white.append(pic.trans(s[i+2], s[i+3]))
-        pic.draw(userID + '.png')
-        message = ImageSendMessage(
-            original_content_url='https://tocfinalproject.herokuapp.com/getpic/' + userID,
-            preview_image_url='https://tocfinalproject.herokuapp.com/getpic/' + userID
-        )
+        # pic = draw()
+        # for i in range(0, len(data), 5):
+        #     if data[i] == '1':
+        #         pic.black.append(pic.trans(s[i+2], s[i+3]))
+        #     else:
+        #         pic.white.append(pic.trans(s[i+2], s[i+3]))
+        # pic.draw(userID + '.png')
+        # message = ImageSendMessage(
+        #     original_content_url='https://tocfinalproject.herokuapp.com/getpic/' + userID,
+        #     preview_image_url='https://tocfinalproject.herokuapp.com/getpic/' + userID
+        # )
         line_bot_api.reply_message(event.reply_token, message)
-        # line_bot_api.reply_message(
-        #     event.reply_token, TextSendMessage(text=message)
-        # ) 
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=message)
+        ) 
 
     return "OK"
 
