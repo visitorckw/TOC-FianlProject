@@ -171,6 +171,7 @@ class chessboard (object):
 					print (' X',end='')
 					#self.console(-1)
 			# self.console(-1)
+			print('   ', end = '')
 			print (chr(ord('A') + row))
 		return 0
 
