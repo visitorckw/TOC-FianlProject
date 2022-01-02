@@ -766,7 +766,7 @@ def gamemain():
 	undo = False
 
 	# �����Ѷ�
-	DEPTH = 1
+	DEPTH = 2
 
 	if len(sys.argv) > 1:
 		if sys.argv[1].lower() == 'hard':

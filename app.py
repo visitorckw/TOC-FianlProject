@@ -11,6 +11,8 @@ from fsm import TocMachine
 from utils import send_text_message
 # from draw import draw
 
+state = {}
+
 load_dotenv()
 
 machine = TocMachine( 
@@ -73,12 +75,20 @@ def callback():
             continue
         message = event.message.text
         userID = str(event.source.user_id)
-        print(type(event.source.user_id))
-        print('userid = ', userID)
         f = open('input.txt', 'w')
+        if message == 'quit' or message == 'q':
+            message = 'Thanks for playing!\n'
+            state[userID] = 'quit'
+            line_bot_api.reply_message(
+                event.reply_token, TextSendMessage(text=message)
+            )
+            continue 
+        if len(message) == 2:
+            state[userID] = 'playing'
         if message != 'new game':
             f.write(message + '\n')
         else:
+            state[userID] = 'new game'
             open(userID + '.txt', 'w').close()
         f.write('q\n')
         f.close()
@@ -102,6 +112,10 @@ def callback():
             if len(s) >= 9 and s[:9] == 'Your move' and i <= len(result) - 10:
                 message = ''
                 continue
+            if len(s) >= 8 and s == 'YOU LOSE':
+                state[userID] = 'lose'
+            if len(s) >= 7 and s == 'YOU WIN':
+                state[userID] = 'win'
             message += s
         # pic = draw()
         # for i in range(0, len(data), 5):
@@ -118,7 +132,7 @@ def callback():
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=message)
         ) 
-
+    print('state: ', state[userID])
     return "OK"
 
 
