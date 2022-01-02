@@ -4,7 +4,7 @@ import sys, time
 
 
 #----------------------------------------------------------------------
-# chessboard: �����࣬�򵥴��ַ���������ֻ��ߵ����ַ������ж���Ӯ��
+# chessboard: 
 #----------------------------------------------------------------------
 class chessboard (object):
 
@@ -16,18 +16,15 @@ class chessboard (object):
 		self.DIRS = self.__dirs
 		self.won = {}
 	
-	# �������
 	def reset (self):
 		for j in range(15):
 			for i in range(15):
 				self.__board[i][j] = 0
 		return 0
 	
-	# ������
 	def __getitem__ (self, row):
 		return self.__board[row]
 
-	# ������ת�����ַ���
 	def __str__ (self):
 		text = '  A B C D E F G H I J K L M N O\n'
 		mark = ('. ', 'O ', 'X ')
@@ -39,7 +36,6 @@ class chessboard (object):
 			if nrow < 15: text += '\n'
 		return text
 	
-	# ת���ַ���
 	def __repr__ (self):
 		return self.__str__()
 
@@ -53,7 +49,6 @@ class chessboard (object):
 			self.__board[row][col] = x
 		return 0
 	
-	# �ж���Ӯ������0������Ӯ����1������Ӯ����2������Ӯ��
 	def check (self):
 		board = self.__board
 		dirs = ((1, -1), (1, 0), (1, 1), (0, 1))
@@ -79,11 +74,9 @@ class chessboard (object):
 						return id
 		return 0
 	
-	# �����������
 	def board (self):
 		return self.__board
 	
-	# ������ֵ��ַ���
 	def dumps (self):
 		from io import StringIO
 		sio = StringIO()
@@ -97,7 +90,6 @@ class chessboard (object):
 					sio.write('%d:%s%s '%(stone, ti, tj))
 		return sio.getvalue()
 	
-	# ���ַ����������
 	def loads (self, text):
 		self.reset()
 		board = self.__board
@@ -111,7 +103,6 @@ class chessboard (object):
 			board[i][j] = stone
 		return 0
 
-	# �����ն���ɫ
 	def console (self, color):
 		if sys.platform[:3] == 'win':
 			try: import ctypes
@@ -147,7 +138,6 @@ class chessboard (object):
 				sys.stdout.flush()
 		return 0
 	
-	# ��ɫ���
 	def show (self):
 		print (' A B C D E F G H I J K L M N O')
 		mark = ('. ', 'O ', 'X ')
@@ -187,7 +177,7 @@ class chessboard (object):
 
 
 #----------------------------------------------------------------------
-# evaluation: ���������࣬����ǰ���̴����
+# evaluation:
 #----------------------------------------------------------------------
 class evaluation (object):
 
@@ -197,34 +187,34 @@ class evaluation (object):
 			row = [ (7 - max(abs(i - 7), abs(j - 7))) for j in range(15) ]
 			self.POS.append(tuple(row))
 		self.POS = tuple(self.POS)
-		self.STWO = 1		# ���
-		self.STHREE = 2		# ����
-		self.SFOUR = 3		# ����
-		self.TWO = 4		# ���
-		self.THREE = 5		# ����
-		self.FOUR = 6		# ����
-		self.FIVE = 7		# ����
-		self.DFOUR = 8		# ˫��
-		self.FOURT = 9		# ����
-		self.DTHREE = 10	# ˫��
+		self.STWO = 1		
+		self.STHREE = 2	
+		self.SFOUR = 3	
+		self.TWO = 4		
+		self.THREE = 5		
+		self.FOUR = 6		
+		self.FIVE = 7		
+		self.DFOUR = 8		
+		self.FOURT = 9		
+		self.DTHREE = 10	
 		self.NOTYPE = 11	
-		self.ANALYSED = 255		# �Ѿ�������
-		self.TODO = 0			# û�з�����
-		self.result = [ 0 for i in range(30) ]		# ���浱ǰֱ�߷���ֵ
-		self.line = [ 0 for i in range(30) ]		# ��ǰֱ������
-		self.record = []			# ȫ�̷������ [row][col][����]
+		self.ANALYSED = 255		
+		self.TODO = 0			
+		self.result = [ 0 for i in range(30) ]		
+		self.line = [ 0 for i in range(30) ]		
+		self.record = []		
 		for i in range(15):
 			self.record.append([])
 			self.record[i] = []
 			for j in range(15):
 				self.record[i].append([ 0, 0, 0, 0])
-		self.count = []				# ÿ����ֵĸ�����count[����/����][ģʽ]
+		self.count = []				
 		for i in range(3):
 			data = [ 0 for i in range(20) ]
 			self.count.append(data)
 		self.reset()
 
-	# ��λ����
+
 	def reset (self):
 		TODO = self.TODO
 		count = self.count
@@ -241,7 +231,7 @@ class evaluation (object):
 			count[2][i] = 0
 		return 0
 
-	# �ĸ�����ˮƽ����ֱ����б����б�������������̣�Ȼ����ݷ���������
+
 	def evaluate (self, board, turn):
 		score = self.__evaluate(board, turn)
 		count = self.count
@@ -257,31 +247,31 @@ class evaluation (object):
 					score += i
 		return score
 	
-	# �ĸ�����ˮƽ����ֱ����б����б�������������̣�Ȼ����ݷ���������
+
 	def __evaluate (self, board, turn):
 		record, count = self.record, self.count
 		TODO, ANALYSED = self.TODO, self.ANALYSED
 		self.reset()
-		# �ĸ��������
+		
 		for i in range(15):
 			boardrow = board[i]
 			recordrow = record[i]
 			for j in range(15):
 				if boardrow[j] != 0:
-					if recordrow[j][0] == TODO:		# ˮƽû�з�������
+					if recordrow[j][0] == TODO:		
 						self.__analysis_horizon(board, i, j)
-					if recordrow[j][1] == TODO:		# ��ֱû�з�������
+					if recordrow[j][1] == TODO:		
 						self.__analysis_vertical(board, i, j)
-					if recordrow[j][2] == TODO:		# ��бû�з�������
+					if recordrow[j][2] == TODO:		
 						self.__analysis_left(board, i, j)
-					if recordrow[j][3] == TODO:		# ��бû�з�����
+					if recordrow[j][3] == TODO:		
 						self.__analysis_right(board, i, j)
 
 		FIVE, FOUR, THREE, TWO = self.FIVE, self.FOUR, self.THREE, self.TWO
 		SFOUR, STHREE, STWO = self.SFOUR, self.STHREE, self.STWO
 		check = {}
 
-		# �ֱ�԰��������㣺FIVE, FOUR, THREE, TWO�ȳ��ֵĴ���
+		
 		for c in (FIVE, FOUR, SFOUR, THREE, STHREE, TWO, STWO):
 			check[c] = 1
 		for i in range(15):
@@ -293,26 +283,26 @@ class evaluation (object):
 						if ch in check:
 							count[stone][ch] += 1
 		
-		# ��������������Ϸ��ط���
+		
 		BLACK, WHITE = 1, 2
-		if turn == WHITE:			# ��ǰ�ǰ���
+		if turn == WHITE:			
 			if count[BLACK][FIVE]:
 				return -9999
 			if count[WHITE][FIVE]:
 				return 9999
-		else:						# ��ǰ�Ǻ���
+		else:				
 			if count[WHITE][FIVE]:
 				return -9999
 			if count[BLACK][FIVE]:
 				return 9999
 		
-		# ��������������ģ����൱����һ������
+		
 		if count[WHITE][SFOUR] >= 2:
 			count[WHITE][FOUR] += 1
 		if count[BLACK][SFOUR] >= 2:
 			count[BLACK][FOUR] += 1
 
-		# ������
+		
 		wvalue, bvalue, win = 0, 0, 0
 		if turn == WHITE:
 			if count[WHITE][FOUR] > 0: return 9990
@@ -381,7 +371,7 @@ class evaluation (object):
 			if count[WHITE][STWO]:
 				wvalue += count[WHITE][STWO]
 		
-		# ����λ��Ȩֵ�����������ĵ�Ȩֵ��7������һ��-1������Ȧ��0
+		
 		wc, bc = 0, 0
 		for i in range(15):
 			for j in range(15):
@@ -399,7 +389,7 @@ class evaluation (object):
 
 		return bvalue - wvalue
 	
-	# ��������
+	
 	def __analysis_horizon (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -411,7 +401,7 @@ class evaluation (object):
 				record[i][x][0] = result[x]
 		return record[i][j][0]
 	
-	# ��������
+	
 	def __analysis_vertical (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -423,7 +413,7 @@ class evaluation (object):
 				record[x][j][1] = result[x]
 		return record[i][j][1]
 	
-	# ������б
+	
 	def __analysis_left (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -441,7 +431,7 @@ class evaluation (object):
 				record[y + s][x + s][2] = result[s]
 		return record[i][j][2]
 
-	# ������б
+
 	def __analysis_right (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -480,7 +470,7 @@ class evaluation (object):
 						pass
 		return 0
 	
-	# ����һ���ߣ���������������
+	
 	def analysis_line (self, line, record, num, pos):
 		TODO, ANALYSED = self.TODO, self.ANALYSED
 		THREE, STHREE = self.THREE, self.STHREE
@@ -500,63 +490,62 @@ class evaluation (object):
 		num -= 1
 		xl = pos
 		xr = pos
-		while xl > 0:		# ̽����߽�
+		while xl > 0:		
 			if line[xl - 1] != stone: break
 			xl -= 1
-		while xr < num:		# ̽���ұ߽�
+		while xr < num:	
 			if line[xr + 1] != stone: break
 			xr += 1
 		left_range = xl
 		right_range = xr
-		while left_range > 0:		# ̽����߷�Χ���ǶԷ����ӵĸ������꣩
+		while left_range > 0:	
 			if line[left_range - 1] == inverse: break
 			left_range -= 1
-		while right_range < num:	# ̽���ұ߷�Χ���ǶԷ����ӵĸ������꣩
+		while right_range < num:	
 			if line[right_range + 1] == inverse: break
 			right_range += 1
 		
-		# �����ֱ�߷�ΧС�� 5����ֱ�ӷ���
+		
 		if right_range - left_range < 4:
 			for k in range(left_range, right_range + 1):
 				record[k] = ANALYSED
 			return 0
 		
-		# �����Ѿ�������
+		
 		for k in range(xl, xr + 1):
 			record[k] = ANALYSED
 		
 		srange = xr - xl
 
-		# ����� 5��
+		
 		if srange >= 4:	
 			record[pos] = self.FIVE
 			return self.FIVE
 		
-		# ����� 4��
+		
 		if srange == 3:	
-			leftfour = False	# �Ƿ�����ǿո�
+			leftfour = False
 			if xl > 0:
-				if line[xl - 1] == 0:		# ����
+				if line[xl - 1] == 0:	
 					leftfour = True
 			if xr < num:
 				if line[xr + 1] == 0:
 					if leftfour:
-						record[pos] = self.FOUR		# ����
+						record[pos] = self.FOUR	
 					else:
-						record[pos] = self.SFOUR	# ����
+						record[pos] = self.SFOUR	
 				else:
 					if leftfour:
-						record[pos] = self.SFOUR	# ����
+						record[pos] = self.SFOUR	
 			else:
 				if leftfour:
-					record[pos] = self.SFOUR		# ����
+					record[pos] = self.SFOUR		
 			return record[pos]
 		
-		# ����� 3��
-		if srange == 2:		# ����
-			left3 = False	# �Ƿ�����ǿո�
+		if srange == 2:		
+			left3 = False	
 			if xl > 0:
-				if line[xl - 1] == 0:	# �������
+				if line[xl - 1] == 0:
 					if xl > 1 and line[xl - 2] == stone:
 						record[xl] = SFOUR
 						record[xl - 2] = ANALYSED
@@ -565,9 +554,9 @@ class evaluation (object):
 				elif xr == num or line[xr + 1] != 0:
 					return 0
 			if xr < num:
-				if line[xr + 1] == 0:	# �ұ�����
+				if line[xr + 1] == 0:	
 					if xr < num - 1 and line[xr + 2] == stone:
-						record[xr] = SFOUR	# XXX-X �൱�ڳ���
+						record[xr] = SFOUR
 						record[xr + 2] = ANALYSED
 					elif left3:
 						record[xr] = THREE
@@ -584,11 +573,11 @@ class evaluation (object):
 					record[pos] = STHREE
 			return record[pos]
 		
-		# ����� 2��
-		if srange == 1:		# ����
+		
+		if srange == 1:		
 			left2 = False
 			if xl > 2:
-				if line[xl - 1] == 0:		# �������
+				if line[xl - 1] == 0:		
 					if line[xl - 2] == stone:
 						if line[xl - 3] == stone:
 							record[xl - 3] = ANALYSED
@@ -600,7 +589,7 @@ class evaluation (object):
 					else:
 						left2 = True
 			if xr < num:
-				if line[xr + 1] == 0:	# �������
+				if line[xr + 1] == 0:	
 					if xr < num - 2 and line[xr + 2] == stone:
 						if line[xr + 3] == stone:
 							record[xr + 3] = ANALYSED
@@ -637,11 +626,10 @@ class evaluation (object):
 
 
 #----------------------------------------------------------------------
-# DFS: ����������
+# DFS: 
 #----------------------------------------------------------------------
 class searcher (object):
 
-	# ��ʼ��
 	def __init__ (self):
 		self.evaluator = evaluation()
 		self.board = [ [ 0 for n in range(15) ] for i in range(15) ]
@@ -649,7 +637,6 @@ class searcher (object):
 		self.overvalue = 0
 		self.maxdepth = 3
 
-	# ������ǰ��ֵ��߷�
 	def genmove (self, turn):
 		moves = []
 		board = self.board
@@ -663,54 +650,40 @@ class searcher (object):
 		moves.reverse()
 		return moves
 	
-	# �ݹ�������������ѷ���
 	def __search (self, turn, depth, alpha = -0x7fffffff, beta = 0x7fffffff):
 
-		# ���Ϊ�����������̲�����
 		if depth <= 0:
 			score = self.evaluator.evaluate(self.board, turn)
 			return score
 
-		# �����Ϸ��������������
 		score = self.evaluator.evaluate(self.board, turn)
 		if abs(score) >= 9999 and depth < self.maxdepth: 
 			return score
 
-		# �����µ��߷�
 		moves = self.genmove(turn)
 		bestmove = None
 
-		# ö�ٵ�ǰ�����߷�
 		for score, row, col in moves:
 
-			# ��ǵ�ǰ�߷�������
 			self.board[row][col] = turn
 			
-			# ������һ�غϸ�˭��
 			nturn = turn == 1 and 2 or 1
 
-			# ��������������������֣��ߵ��к��ߵ���
 			score = - self.__search(nturn, depth - 1, -beta, -alpha)
 
-			# �����������ǰ�߷�
 			self.board[row][col] = 0
 
-			# ������÷�ֵ���߷�
-			# alpha/beta ��֦
 			if score > alpha:
 				alpha = score
 				bestmove = (row, col)
 				if alpha >= beta:
 					break
 		
-		# ����ǵ�һ�����¼��õ��߷�
 		if depth == self.maxdepth and bestmove:
 			self.bestmove = bestmove
 
-		# ���ص�ǰ��õķ������͸÷����Ķ�Ӧ�߷�
 		return alpha
 
-	# �������������뵱ǰ�Ǹ�˭��(turn=1/2)���Լ��������(depth)
 	def search (self, turn, depth = 3):
 		self.maxdepth = depth
 		self.bestmove = None
@@ -765,7 +738,6 @@ def gamemain():
 	history = []
 	undo = False
 
-	# �����Ѷ�
 	DEPTH = 2
 
 	if len(sys.argv) > 1:
