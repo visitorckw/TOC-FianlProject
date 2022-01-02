@@ -15,7 +15,7 @@ state = {}
 
 load_dotenv()
 
-machine = TocMachine( 
+machine = TocMachine(
     states=["user", "state1", "state2"],
     transitions=[
         {
