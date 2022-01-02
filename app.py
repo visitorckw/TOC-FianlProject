@@ -79,7 +79,7 @@ def callback():
             f.write('1 shosboard') 
             f.close()
             print('before exec')
-            os.system('./gnugo --mode gtp < input.txt > output.txt')
+            os.system('sudo ./gnugo --mode gtp < input.txt > output.txt')
             print('after exec')
             f = open('output.txt', 'r')
             result = f.readlines()
