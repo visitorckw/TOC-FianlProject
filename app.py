@@ -9,7 +9,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSend
 
 from fsm import TocMachine
 from utils import send_text_message
-from draw import draw
+# from draw import draw
 
 state = {}
 
