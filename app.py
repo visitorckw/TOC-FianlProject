@@ -5,13 +5,13 @@ from flask import Flask, jsonify, request, abort, send_file
 from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 
 from fsm import TocMachine
 from utils import send_text_message
+from draw import draw
 
 load_dotenv()
-
 
 machine = TocMachine( 
     states=["user", "state1", "state2"],
@@ -72,26 +72,54 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         message = event.message.text
-        # if message == 'play black':
+        userID = event.source.userId
+        if message == 'new game':
+            filename = userID + '.txt'
+            open(filename, 'w').close()
+            pic = draw()
+            pic.draw(userID + '.png')
+            message = ImageSendMessage(
+                original_content_url='https://tocfinalproject.herokuapp.com/getpic/' + userID,
+                preview_image_url='https://tocfinalproject.herokuapp.com/getpic/' + userID
+            )
+            line_bot_api.reply_message(event.reply_token, message)
+            continue
         f = open('input.txt', 'w')
         f.write(message + '\n')
-        f.write('q\n') 
+        f.write('q\n')
         f.close()
-        os.system('python gobang.py < input.txt > output.txt')
+        os.system('python gobang.py ' + userID + '.txt ' < 'input.txt > output.txt')
         f = open('output.txt', 'r')
         result = f.readlines()
         f.close()
         message = ''
+        data = ''
         for s in result:
             if len(s) >= 4 and s[:4] == 'DUMP':
-                f = open('dump.txt','w')
+                filename = userID + '.txt'
+                if not os.path.exists(filename):
+                    open(filename, 'w').close()
+                f = open(filename,'w')
                 f.write(s[4:])
+                data = s[4:]
                 f.close()
                 continue
             message += s
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=message)
+        pic = draw()
+        for i in range(0, len(data), 5):
+            if data[i] == '1':
+                pic.black.append(pic.trans(s[i+2], s[i+3]))
+            else:
+                pic.white.append(pic.trans(s[i+2], s[i+3]))
+        pic.draw(userID + '.png')
+        message = ImageSendMessage(
+            original_content_url='https://tocfinalproject.herokuapp.com/getpic/' + userID,
+            preview_image_url='https://tocfinalproject.herokuapp.com/getpic/' + userID
         )
+        line_bot_api.reply_message(event.reply_token, message)
+        # line_bot_api.reply_message(
+        #     event.reply_token, TextSendMessage(text=message)
+        # )
 
     return "OK"
 
@@ -130,6 +158,9 @@ def webhook_handler():
 def show_fsm():
     machine.get_graph().draw("fsm.png", prog="dot", format="png")
     return send_file("fsm.png", mimetype="image/png")
+@app.route("/getpic/<filename>")
+def getpic(filename):
+    return send_file(filename, mimetype='image/png')
 
 
 if __name__ == "__main__":

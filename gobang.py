@@ -161,7 +161,7 @@ class chessboard (object):
 				ch = self.__board[row][col]
 				if ch == 0: 
 					# self.console(-1)
-					print ('  .', end='')
+					print (' .', end='')
 				elif ch == 1:
 					if (row, col) in self.won:
 						# self.console(9)
@@ -169,7 +169,7 @@ class chessboard (object):
 					else:
 						# self.console(10)
 						pass
-					print ('  O',end='')
+					print (' O',end='')
 					# self.console(-1)
 				elif ch == 2:
 					if (row, col) in self.won:
@@ -178,7 +178,7 @@ class chessboard (object):
 					else:
 						# self.console(13)
 						pass
-					print ('  X',end='')
+					print (' X',end='')
 					#self.console(-1)
 			# self.console(-1)
 			print ('')
@@ -772,7 +772,7 @@ def gamemain():
 			DEPTH = 2
 
 	# b.loads('2:DF 1:EG 2:FG 1:FH 2:FJ 2:GG 1:GH 1:GI 2:HG 1:HH 1:IG 2:IH 1:JF 2:JI 1:KE')
-	f = open('dump.txt', 'r')
+	f = open(sys.argv[1], 'r')
 	data = f.read()
 	b.loads(data)
 	f.close()
