@@ -73,12 +73,13 @@ def callback():
             continue
         message = event.message.text
         userID = str(event.source.user_id)
+        print('userid = ', userID)
         f = open('input.txt', 'w')
         if message != 'new game':
             f.write(message + '\n')
         f.write('q\n')
         f.close()
-        os.system('python gobang.py ' + userID + '.txt ' < 'input.txt > output.txt')
+        os.system('python gobang.py ' + userID + '.txt < input.txt > output.txt')
         f = open('output.txt', 'r')
         result = f.readlines()
         f.close()
