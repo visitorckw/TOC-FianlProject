@@ -4,7 +4,7 @@ import sys, time
 
 
 #----------------------------------------------------------------------
-# chessboard: ÆåÅÌÀà£¬¼òµ¥´Ó×Ö·û´®¼ÓÔØÆå¾Ö»òÕßµ¼³ö×Ö·û´®£¬ÅÐ¶ÏÊäÓ®µÈ
+# chessboard: ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½òµ¥´ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ó®ï¿½ï¿½
 #----------------------------------------------------------------------
 class chessboard (object):
 
@@ -16,18 +16,18 @@ class chessboard (object):
 		self.DIRS = self.__dirs
 		self.won = {}
 	
-	# Çå¿ÕÆåÅÌ
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def reset (self):
 		for j in range(15):
 			for i in range(15):
 				self.__board[i][j] = 0
 		return 0
 	
-	# Ë÷ÒýÆ÷
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def __getitem__ (self, row):
 		return self.__board[row]
 
-	# ½«ÆåÅÌ×ª»»³É×Ö·û´®
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	def __str__ (self):
 		text = '  A B C D E F G H I J K L M N O\n'
 		mark = ('. ', 'O ', 'X ')
@@ -39,7 +39,7 @@ class chessboard (object):
 			if nrow < 15: text += '\n'
 		return text
 	
-	# ×ª³É×Ö·û´®
+	# ×ªï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	def __repr__ (self):
 		return self.__str__()
 
@@ -53,7 +53,7 @@ class chessboard (object):
 			self.__board[row][col] = x
 		return 0
 	
-	# ÅÐ¶ÏÊäÓ®£¬·µ»Ø0£¨ÎÞÊäÓ®£©£¬1£¨°×ÆåÓ®£©£¬2£¨ºÚÆåÓ®£©
+	# ï¿½Ð¶ï¿½ï¿½ï¿½Ó®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó®ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó®ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó®ï¿½ï¿½
 	def check (self):
 		board = self.__board
 		dirs = ((1, -1), (1, 0), (1, 1), (0, 1))
@@ -79,11 +79,11 @@ class chessboard (object):
 						return id
 		return 0
 	
-	# ·µ»ØÊý×é¶ÔÏó
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def board (self):
 		return self.__board
 	
-	# µ¼³öÆå¾Öµ½×Ö·û´®
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	def dumps (self):
 		from io import StringIO
 		sio = StringIO()
@@ -97,7 +97,7 @@ class chessboard (object):
 					sio.write('%d:%s%s '%(stone, ti, tj))
 		return sio.getvalue()
 	
-	# ´Ó×Ö·û´®¼ÓÔØÆå¾Ö
+	# ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def loads (self, text):
 		self.reset()
 		board = self.__board
@@ -111,7 +111,7 @@ class chessboard (object):
 			board[i][j] = stone
 		return 0
 
-	# ÉèÖÃÖÕ¶ËÑÕÉ«
+	# ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½É«
 	def console (self, color):
 		if sys.platform[:3] == 'win':
 			try: import ctypes
@@ -147,7 +147,7 @@ class chessboard (object):
 				sys.stdout.flush()
 		return 0
 	
-	# ²ÊÉ«Êä³ö
+	# ï¿½ï¿½É«ï¿½ï¿½ï¿½
 	def show (self):
 		print ('  A B C D E F G H I J K L M N O')
 		mark = ('. ', 'O ', 'X ')
@@ -160,29 +160,29 @@ class chessboard (object):
 			for col in range(15):
 				ch = self.__board[row][col]
 				if ch == 0: 
-					self.console(-1)
-					print ('. ', end='')
+					# self.console(-1)
+					print (' .', end='')
 				elif ch == 1:
 					if (row, col) in self.won:
-						self.console(9)
+						# self.console(9)
 					else:
-						self.console(10)
-					print ('O ',end='')
+						# self.console(10)
+					print (' O',end='')
 					#self.console(-1)
 				elif ch == 2:
 					if (row, col) in self.won:
-						self.console(9)
+						# self.console(9)
 					else:
-						self.console(13)
-					print ('X ',end='')
+						# self.console(13)
+					print (' X',end='')
 					#self.console(-1)
-			self.console(-1)
+			# self.console(-1)
 			print ('')
 		return 0
 
 
 #----------------------------------------------------------------------
-# evaluation: ÆåÅÌÆÀ¹ÀÀà£¬¸øµ±Ç°ÆåÅÌ´ò·ÖÓÃ
+# evaluation: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½
 #----------------------------------------------------------------------
 class evaluation (object):
 
@@ -192,34 +192,34 @@ class evaluation (object):
 			row = [ (7 - max(abs(i - 7), abs(j - 7))) for j in range(15) ]
 			self.POS.append(tuple(row))
 		self.POS = tuple(self.POS)
-		self.STWO = 1		# ³å¶þ
-		self.STHREE = 2		# ³åÈý
-		self.SFOUR = 3		# ³åËÄ
-		self.TWO = 4		# »î¶þ
-		self.THREE = 5		# »îÈý
-		self.FOUR = 6		# »îËÄ
-		self.FIVE = 7		# »îÎå
-		self.DFOUR = 8		# Ë«ËÄ
-		self.FOURT = 9		# ËÄÈý
-		self.DTHREE = 10	# Ë«Èý
+		self.STWO = 1		# ï¿½ï¿½ï¿½
+		self.STHREE = 2		# ï¿½ï¿½ï¿½ï¿½
+		self.SFOUR = 3		# ï¿½ï¿½ï¿½ï¿½
+		self.TWO = 4		# ï¿½ï¿½ï¿½
+		self.THREE = 5		# ï¿½ï¿½ï¿½ï¿½
+		self.FOUR = 6		# ï¿½ï¿½ï¿½ï¿½
+		self.FIVE = 7		# ï¿½ï¿½ï¿½ï¿½
+		self.DFOUR = 8		# Ë«ï¿½ï¿½
+		self.FOURT = 9		# ï¿½ï¿½ï¿½ï¿½
+		self.DTHREE = 10	# Ë«ï¿½ï¿½
 		self.NOTYPE = 11	
-		self.ANALYSED = 255		# ÒÑ¾­·ÖÎö¹ý
-		self.TODO = 0			# Ã»ÓÐ·ÖÎö¹ý
-		self.result = [ 0 for i in range(30) ]		# ±£´æµ±Ç°Ö±Ïß·ÖÎöÖµ
-		self.line = [ 0 for i in range(30) ]		# µ±Ç°Ö±ÏßÊý¾Ý
-		self.record = []			# È«ÅÌ·ÖÎö½á¹û [row][col][·½Ïò]
+		self.ANALYSED = 255		# ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		self.TODO = 0			# Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½
+		self.result = [ 0 for i in range(30) ]		# ï¿½ï¿½ï¿½æµ±Ç°Ö±ï¿½ß·ï¿½ï¿½ï¿½Öµ
+		self.line = [ 0 for i in range(30) ]		# ï¿½ï¿½Ç°Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		self.record = []			# È«ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ [row][col][ï¿½ï¿½ï¿½ï¿½]
 		for i in range(15):
 			self.record.append([])
 			self.record[i] = []
 			for j in range(15):
 				self.record[i].append([ 0, 0, 0, 0])
-		self.count = []				# Ã¿ÖÖÆå¾ÖµÄ¸öÊý£ºcount[ºÚÆå/°×Æå][Ä£Ê½]
+		self.count = []				# Ã¿ï¿½ï¿½ï¿½ï¿½ÖµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½count[ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½][Ä£Ê½]
 		for i in range(3):
 			data = [ 0 for i in range(20) ]
 			self.count.append(data)
 		self.reset()
 
-	# ¸´Î»Êý¾Ý
+	# ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
 	def reset (self):
 		TODO = self.TODO
 		count = self.count
@@ -236,7 +236,7 @@ class evaluation (object):
 			count[2][i] = 0
 		return 0
 
-	# ËÄ¸ö·½Ïò£¨Ë®Æ½£¬´¹Ö±£¬×óÐ±£¬ÓÒÐ±£©·ÖÎöÆÀ¹ÀÆåÅÌ£¬È»ºó¸ù¾Ý·ÖÎö½á¹û´ò·Ö
+	# ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½È»ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def evaluate (self, board, turn):
 		score = self.__evaluate(board, turn)
 		count = self.count
@@ -252,31 +252,31 @@ class evaluation (object):
 					score += i
 		return score
 	
-	# ËÄ¸ö·½Ïò£¨Ë®Æ½£¬´¹Ö±£¬×óÐ±£¬ÓÒÐ±£©·ÖÎöÆÀ¹ÀÆåÅÌ£¬È»ºó¸ù¾Ý·ÖÎö½á¹û´ò·Ö
+	# ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½È»ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def __evaluate (self, board, turn):
 		record, count = self.record, self.count
 		TODO, ANALYSED = self.TODO, self.ANALYSED
 		self.reset()
-		# ËÄ¸ö·½Ïò·ÖÎö
+		# ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for i in range(15):
 			boardrow = board[i]
 			recordrow = record[i]
 			for j in range(15):
 				if boardrow[j] != 0:
-					if recordrow[j][0] == TODO:		# Ë®Æ½Ã»ÓÐ·ÖÎö¹ý£¿
+					if recordrow[j][0] == TODO:		# Ë®Æ½Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						self.__analysis_horizon(board, i, j)
-					if recordrow[j][1] == TODO:		# ´¹Ö±Ã»ÓÐ·ÖÎö¹ý£¿
+					if recordrow[j][1] == TODO:		# ï¿½ï¿½Ö±Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						self.__analysis_vertical(board, i, j)
-					if recordrow[j][2] == TODO:		# ×óÐ±Ã»ÓÐ·ÖÎö¹ý£¿
+					if recordrow[j][2] == TODO:		# ï¿½ï¿½Ð±Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						self.__analysis_left(board, i, j)
-					if recordrow[j][3] == TODO:		# ÓÒÐ±Ã»ÓÐ·ÖÎö¹ý
+					if recordrow[j][3] == TODO:		# ï¿½ï¿½Ð±Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½
 						self.__analysis_right(board, i, j)
 
 		FIVE, FOUR, THREE, TWO = self.FIVE, self.FOUR, self.THREE, self.TWO
 		SFOUR, STHREE, STWO = self.SFOUR, self.STHREE, self.STWO
 		check = {}
 
-		# ·Ö±ð¶Ô°×ÆåºÚÆå¼ÆËã£ºFIVE, FOUR, THREE, TWOµÈ³öÏÖµÄ´ÎÊý
+		# ï¿½Ö±ï¿½Ô°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£ºFIVE, FOUR, THREE, TWOï¿½È³ï¿½ï¿½ÖµÄ´ï¿½ï¿½ï¿½
 		for c in (FIVE, FOUR, SFOUR, THREE, STHREE, TWO, STWO):
 			check[c] = 1
 		for i in range(15):
@@ -288,26 +288,26 @@ class evaluation (object):
 						if ch in check:
 							count[stone][ch] += 1
 		
-		# Èç¹ûÓÐÎåÁ¬ÔòÂíÉÏ·µ»Ø·ÖÊý
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ø·ï¿½ï¿½ï¿½
 		BLACK, WHITE = 1, 2
-		if turn == WHITE:			# µ±Ç°ÊÇ°×Æå
+		if turn == WHITE:			# ï¿½ï¿½Ç°ï¿½Ç°ï¿½ï¿½ï¿½
 			if count[BLACK][FIVE]:
 				return -9999
 			if count[WHITE][FIVE]:
 				return 9999
-		else:						# µ±Ç°ÊÇºÚÆå
+		else:						# ï¿½ï¿½Ç°ï¿½Çºï¿½ï¿½ï¿½
 			if count[WHITE][FIVE]:
 				return -9999
 			if count[BLACK][FIVE]:
 				return 9999
 		
-		# Èç¹û´æÔÚÁ½¸ö³åËÄ£¬ÔòÏàµ±ÓÚÓÐÒ»¸ö»îËÄ
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½àµ±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if count[WHITE][SFOUR] >= 2:
 			count[WHITE][FOUR] += 1
 		if count[BLACK][SFOUR] >= 2:
 			count[BLACK][FOUR] += 1
 
-		# ¾ßÌå´ò·Ö
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		wvalue, bvalue, win = 0, 0, 0
 		if turn == WHITE:
 			if count[WHITE][FOUR] > 0: return 9990
@@ -376,7 +376,7 @@ class evaluation (object):
 			if count[WHITE][STWO]:
 				wvalue += count[WHITE][STWO]
 		
-		# ¼ÓÉÏÎ»ÖÃÈ¨Öµ£¬ÆåÅÌ×îÖÐÐÄµãÈ¨ÖµÊÇ7£¬ÍùÍâÒ»¸ñ-1£¬×îÍâÈ¦ÊÇ0
+		# ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½È¨Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½È¨Öµï¿½ï¿½7ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½-1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¦ï¿½ï¿½0
 		wc, bc = 0, 0
 		for i in range(15):
 			for j in range(15):
@@ -394,7 +394,7 @@ class evaluation (object):
 
 		return bvalue - wvalue
 	
-	# ·ÖÎöºáÏò
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def __analysis_horizon (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -406,7 +406,7 @@ class evaluation (object):
 				record[i][x][0] = result[x]
 		return record[i][j][0]
 	
-	# ·ÖÎöºáÏò
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def __analysis_vertical (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -418,7 +418,7 @@ class evaluation (object):
 				record[x][j][1] = result[x]
 		return record[i][j][1]
 	
-	# ·ÖÎö×óÐ±
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±
 	def __analysis_left (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -436,7 +436,7 @@ class evaluation (object):
 				record[y + s][x + s][2] = result[s]
 		return record[i][j][2]
 
-	# ·ÖÎöÓÒÐ±
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±
 	def __analysis_right (self, board, i, j):
 		line, result, record = self.line, self.result, self.record
 		TODO = self.TODO
@@ -475,7 +475,7 @@ class evaluation (object):
 						pass
 		return 0
 	
-	# ·ÖÎöÒ»ÌõÏß£ºÎåËÄÈý¶þµÈÆåÐÍ
+	# ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	def analysis_line (self, line, record, num, pos):
 		TODO, ANALYSED = self.TODO, self.ANALYSED
 		THREE, STHREE = self.THREE, self.STHREE
@@ -495,63 +495,63 @@ class evaluation (object):
 		num -= 1
 		xl = pos
 		xr = pos
-		while xl > 0:		# Ì½Ë÷×ó±ß½ç
+		while xl > 0:		# Ì½ï¿½ï¿½ï¿½ï¿½ß½ï¿½
 			if line[xl - 1] != stone: break
 			xl -= 1
-		while xr < num:		# Ì½Ë÷ÓÒ±ß½ç
+		while xr < num:		# Ì½ï¿½ï¿½ï¿½Ò±ß½ï¿½
 			if line[xr + 1] != stone: break
 			xr += 1
 		left_range = xl
 		right_range = xr
-		while left_range > 0:		# Ì½Ë÷×ó±ß·¶Î§£¨·Ç¶Ô·½Æå×ÓµÄ¸ñ×Ó×ø±ê£©
+		while left_range > 0:		# Ì½ï¿½ï¿½ï¿½ï¿½ß·ï¿½Î§ï¿½ï¿½ï¿½Ç¶Ô·ï¿½ï¿½ï¿½ï¿½ÓµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£©
 			if line[left_range - 1] == inverse: break
 			left_range -= 1
-		while right_range < num:	# Ì½Ë÷ÓÒ±ß·¶Î§£¨·Ç¶Ô·½Æå×ÓµÄ¸ñ×Ó×ø±ê£©
+		while right_range < num:	# Ì½ï¿½ï¿½ï¿½Ò±ß·ï¿½Î§ï¿½ï¿½ï¿½Ç¶Ô·ï¿½ï¿½ï¿½ï¿½ÓµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£©
 			if line[right_range + 1] == inverse: break
 			right_range += 1
 		
-		# Èç¹û¸ÃÖ±Ïß·¶Î§Ð¡ÓÚ 5£¬ÔòÖ±½Ó·µ»Ø
+		# ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ß·ï¿½Î§Ð¡ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
 		if right_range - left_range < 4:
 			for k in range(left_range, right_range + 1):
 				record[k] = ANALYSED
 			return 0
 		
-		# ÉèÖÃÒÑ¾­·ÖÎö¹ý
+		# ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for k in range(xl, xr + 1):
 			record[k] = ANALYSED
 		
 		srange = xr - xl
 
-		# Èç¹ûÊÇ 5Á¬
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½
 		if srange >= 4:	
 			record[pos] = self.FIVE
 			return self.FIVE
 		
-		# Èç¹ûÊÇ 4Á¬
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½
 		if srange == 3:	
-			leftfour = False	# ÊÇ·ñ×ó±ßÊÇ¿Õ¸ñ
+			leftfour = False	# ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿Õ¸ï¿½
 			if xl > 0:
-				if line[xl - 1] == 0:		# »îËÄ
+				if line[xl - 1] == 0:		# ï¿½ï¿½ï¿½ï¿½
 					leftfour = True
 			if xr < num:
 				if line[xr + 1] == 0:
 					if leftfour:
-						record[pos] = self.FOUR		# »îËÄ
+						record[pos] = self.FOUR		# ï¿½ï¿½ï¿½ï¿½
 					else:
-						record[pos] = self.SFOUR	# ³åËÄ
+						record[pos] = self.SFOUR	# ï¿½ï¿½ï¿½ï¿½
 				else:
 					if leftfour:
-						record[pos] = self.SFOUR	# ³åËÄ
+						record[pos] = self.SFOUR	# ï¿½ï¿½ï¿½ï¿½
 			else:
 				if leftfour:
-					record[pos] = self.SFOUR		# ³åËÄ
+					record[pos] = self.SFOUR		# ï¿½ï¿½ï¿½ï¿½
 			return record[pos]
 		
-		# Èç¹ûÊÇ 3Á¬
-		if srange == 2:		# ÈýÁ¬
-			left3 = False	# ÊÇ·ñ×ó±ßÊÇ¿Õ¸ñ
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½
+		if srange == 2:		# ï¿½ï¿½ï¿½ï¿½
+			left3 = False	# ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿Õ¸ï¿½
 			if xl > 0:
-				if line[xl - 1] == 0:	# ×ó±ßÓÐÆø
+				if line[xl - 1] == 0:	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if xl > 1 and line[xl - 2] == stone:
 						record[xl] = SFOUR
 						record[xl - 2] = ANALYSED
@@ -560,9 +560,9 @@ class evaluation (object):
 				elif xr == num or line[xr + 1] != 0:
 					return 0
 			if xr < num:
-				if line[xr + 1] == 0:	# ÓÒ±ßÓÐÆø
+				if line[xr + 1] == 0:	# ï¿½Ò±ï¿½ï¿½ï¿½ï¿½ï¿½
 					if xr < num - 1 and line[xr + 2] == stone:
-						record[xr] = SFOUR	# XXX-X Ïàµ±ÓÚ³åËÄ
+						record[xr] = SFOUR	# XXX-X ï¿½àµ±ï¿½Ú³ï¿½ï¿½ï¿½
 						record[xr + 2] = ANALYSED
 					elif left3:
 						record[xr] = THREE
@@ -579,11 +579,11 @@ class evaluation (object):
 					record[pos] = STHREE
 			return record[pos]
 		
-		# Èç¹ûÊÇ 2Á¬
-		if srange == 1:		# Á½Á¬
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½
+		if srange == 1:		# ï¿½ï¿½ï¿½ï¿½
 			left2 = False
 			if xl > 2:
-				if line[xl - 1] == 0:		# ×ó±ßÓÐÆø
+				if line[xl - 1] == 0:		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if line[xl - 2] == stone:
 						if line[xl - 3] == stone:
 							record[xl - 3] = ANALYSED
@@ -595,7 +595,7 @@ class evaluation (object):
 					else:
 						left2 = True
 			if xr < num:
-				if line[xr + 1] == 0:	# ×ó±ßÓÐÆø
+				if line[xr + 1] == 0:	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if xr < num - 2 and line[xr + 2] == stone:
 						if line[xr + 3] == stone:
 							record[xr + 3] = ANALYSED
@@ -632,11 +632,11 @@ class evaluation (object):
 
 
 #----------------------------------------------------------------------
-# DFS: ²©ÞÄÊ÷ËÑË÷
+# DFS: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #----------------------------------------------------------------------
 class searcher (object):
 
-	# ³õÊ¼»¯
+	# ï¿½ï¿½Ê¼ï¿½ï¿½
 	def __init__ (self):
 		self.evaluator = evaluation()
 		self.board = [ [ 0 for n in range(15) ] for i in range(15) ]
@@ -644,7 +644,7 @@ class searcher (object):
 		self.overvalue = 0
 		self.maxdepth = 3
 
-	# ²úÉúµ±Ç°Æå¾ÖµÄ×ß·¨
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Öµï¿½ï¿½ß·ï¿½
 	def genmove (self, turn):
 		moves = []
 		board = self.board
@@ -658,54 +658,54 @@ class searcher (object):
 		moves.reverse()
 		return moves
 	
-	# µÝ¹éËÑË÷£º·µ»Ø×î¼Ñ·ÖÊý
+	# ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½
 	def __search (self, turn, depth, alpha = -0x7fffffff, beta = 0x7fffffff):
 
-		# Éî¶ÈÎªÁãÔòÆÀ¹ÀÆåÅÌ²¢·µ»Ø
+		# ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½
 		if depth <= 0:
 			score = self.evaluator.evaluate(self.board, turn)
 			return score
 
-		# Èç¹ûÓÎÏ·½áÊøÔòÁ¢Âí·µ»Ø
+		# ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		score = self.evaluator.evaluate(self.board, turn)
 		if abs(score) >= 9999 and depth < self.maxdepth: 
 			return score
 
-		# ²úÉúÐÂµÄ×ß·¨
+		# ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ß·ï¿½
 		moves = self.genmove(turn)
 		bestmove = None
 
-		# Ã¶¾Ùµ±Ç°ËùÓÐ×ß·¨
+		# Ã¶ï¿½Ùµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ß·ï¿½
 		for score, row, col in moves:
 
-			# ±ê¼Çµ±Ç°×ß·¨µ½ÆåÅÌ
+			# ï¿½ï¿½Çµï¿½Ç°ï¿½ß·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			self.board[row][col] = turn
 			
-			# ¼ÆËãÏÂÒ»»ØºÏ¸ÃË­×ß
+			# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ØºÏ¸ï¿½Ë­ï¿½ï¿½
 			nturn = turn == 1 and 2 or 1
 
-			# Éî¶ÈÓÅÏÈËÑË÷£¬·µ»ØÆÀ·Ö£¬×ßµÄÐÐºÍ×ßµÄÁÐ
+			# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ßµï¿½ï¿½Ðºï¿½ï¿½ßµï¿½ï¿½ï¿½
 			score = - self.__search(nturn, depth - 1, -beta, -alpha)
 
-			# ÆåÅÌÉÏÇå³ýµ±Ç°×ß·¨
+			# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ß·ï¿½
 			self.board[row][col] = 0
 
-			# ¼ÆËã×îºÃ·ÖÖµµÄ×ß·¨
-			# alpha/beta ¼ôÖ¦
+			# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½Öµï¿½ï¿½ï¿½ß·ï¿½
+			# alpha/beta ï¿½ï¿½Ö¦
 			if score > alpha:
 				alpha = score
 				bestmove = (row, col)
 				if alpha >= beta:
 					break
 		
-		# Èç¹ûÊÇµÚÒ»²ãÔò¼ÇÂ¼×îºÃµÄ×ß·¨
+		# ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ãµï¿½ï¿½ß·ï¿½
 		if depth == self.maxdepth and bestmove:
 			self.bestmove = bestmove
 
-		# ·µ»Øµ±Ç°×îºÃµÄ·ÖÊý£¬ºÍ¸Ã·ÖÊýµÄ¶ÔÓ¦×ß·¨
+		# ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½ï¿½ÃµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸Ã·ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½Ó¦ï¿½ß·ï¿½
 		return alpha
 
-	# ¾ßÌåËÑË÷£º´«Èëµ±Ç°ÊÇ¸ÃË­×ß(turn=1/2)£¬ÒÔ¼°ËÑË÷Éî¶È(depth)
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ±Ç°ï¿½Ç¸ï¿½Ë­ï¿½ï¿½(turn=1/2)ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(depth)
 	def search (self, turn, depth = 3):
 		self.maxdepth = depth
 		self.bestmove = None
@@ -760,7 +760,7 @@ def gamemain():
 	history = []
 	undo = False
 
-	# ÉèÖÃÄÑ¶È
+	# ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½
 	DEPTH = 1
 
 	if len(sys.argv) > 1:
