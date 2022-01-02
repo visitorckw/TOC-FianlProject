@@ -771,6 +771,8 @@ def gamemain():
 		if sys.argv[1].lower() == 'hard':
 			DEPTH = 2
 
+	b.loads('2:DF 1:EG 2:FG 1:FH 2:FJ 2:GG 1:GH 1:GI 2:HG 1:HH 1:IG 2:IH 1:JF 2:JI 1:KE')
+
 	while 1:
 		print ('')
 		while 1:
@@ -834,6 +836,8 @@ def gamemain():
 #----------------------------------------------------------------------
 # testing case
 #----------------------------------------------------------------------
+
+
 if __name__ == '__main__':
 	def test1():
 		b = chessboard()
