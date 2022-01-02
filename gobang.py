@@ -772,6 +772,9 @@ def gamemain():
 			DEPTH = 2
 
 	# b.loads('2:DF 1:EG 2:FG 1:FH 2:FJ 2:GG 1:GH 1:GI 2:HG 1:HH 1:IG 2:IH 1:JF 2:JI 1:KE')
+	import os
+	if not os.path.exists(sys.argv[1]):
+		open(sys.argv[1], 'w').close()
 	f = open(sys.argv[1], 'r')
 	data = f.read()
 	b.loads(data)
