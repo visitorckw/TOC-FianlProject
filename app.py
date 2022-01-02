@@ -72,23 +72,23 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         message = event.message.text
-        if message == 'play black' or 'play white':
-            player = message
-        if message == 'play black':
-            f = open('input.txt', 'w')
-            f.write('q') 
-            f.close()
-            print('before exec')
-            os.system('python gobang.py < input.txt > output.txt')
-            print('after exec')
-            f = open('output.txt', 'r')
-            result = f.readlines()
-            f.close()
-            message = ''
-            for s in result:
-                if len(s) and s[0] == '=':
-                    continue
-                message += s
+        # if message == 'play black':
+        f = open('input.txt', 'w')
+        f.write(message + '\n')
+        f.write('q\n') 
+        f.close()
+        os.system('python gobang.py < input.txt > output.txt')
+        f = open('output.txt', 'r')
+        result = f.readlines()
+        f.close()
+        message = ''
+        for s in result:
+            if len(s) >= 4 and s[:4] == 'DUMP':
+                f = open('dump.txt','w')
+                f.write(s[4:])
+                f.close()
+                continue
+            message += s
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=message)
         )

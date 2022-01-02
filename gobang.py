@@ -771,7 +771,11 @@ def gamemain():
 		if sys.argv[1].lower() == 'hard':
 			DEPTH = 2
 
-	b.loads('2:DF 1:EG 2:FG 1:FH 2:FJ 2:GG 1:GH 1:GI 2:HG 1:HH 1:IG 2:IH 1:JF 2:JI 1:KE')
+	# b.loads('2:DF 1:EG 2:FG 1:FH 2:FJ 2:GG 1:GH 1:GI 2:HG 1:HH 1:IG 2:IH 1:JF 2:JI 1:KE')
+	f = open('dump.txt', 'r')
+	data = f.read()
+	b.loads(data)
+	f.close()
 
 	while 1:
 		print ('')
@@ -795,7 +799,7 @@ def gamemain():
 				undo = True
 				break
 			elif text.upper() == 'Q':
-				print (b.dumps())
+				print ('DUMP' + b.dumps())
 				return 0
 		
 		if undo == True:
