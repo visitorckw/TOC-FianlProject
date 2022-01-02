@@ -72,7 +72,7 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         message = event.message.text
-        userID = event.source.user_id
+        userID = str(event.source.user_id)
         f = open('input.txt', 'w')
         if message != 'new game':
             f.write(message + '\n')
