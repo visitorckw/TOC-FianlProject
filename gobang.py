@@ -161,7 +161,7 @@ class chessboard (object):
 				ch = self.__board[row][col]
 				if ch == 0: 
 					# self.console(-1)
-					print (' .', end='')
+					print ('\t.', end='')
 				elif ch == 1:
 					if (row, col) in self.won:
 						# self.console(9)
@@ -169,7 +169,7 @@ class chessboard (object):
 					else:
 						# self.console(10)
 						pass
-					print (' O',end='')
+					print ('\tO',end='')
 					# self.console(-1)
 				elif ch == 2:
 					if (row, col) in self.won:
@@ -178,7 +178,7 @@ class chessboard (object):
 					else:
 						# self.console(13)
 						pass
-					print (' X',end='')
+					print ('\tX',end='')
 					#self.console(-1)
 			# self.console(-1)
 			print ('')
