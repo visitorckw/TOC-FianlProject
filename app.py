@@ -15,27 +15,111 @@ state = {}
 
 load_dotenv()
 
+# machine = TocMachine(
+#     states=["user", "state1", "state2"],
+#     transitions=[
+#         {
+#             "trigger": "advance",
+#             "source": "user",
+#             "dest": "state1",
+#             "conditions": "is_going_to_state1",
+#         },
+#         {
+#             "trigger": "advance",
+#             "source": "user",
+#             "dest": "state2",
+#             "conditions": "is_going_to_state2",
+#         },
+#         {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+#     ],
+#     initial="user",
+#     auto_transitions=False,
+#     show_conditions=True,
+# )
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["new game", "playing", "win", "lose", "quit"],
     transitions=[
         {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
+            "trigger": "new game",
+            "source": "new game",
+            "dest": "new game",
         },
         {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
+            "trigger": "new game",
+            "source": "playing",
+            "dest": "new game",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "new game",
+            "source": "win",
+            "dest": "new game",
+        },
+        {
+            "trigger": "new game",
+            "source": "lose",
+            "dest": "new game",
+        },
+        {
+            "trigger": "new game",
+            "source": "quit",
+            "dest": "new game",
+        },
+        {
+            "trigger": "move",
+            "source": "new game",
+            "dest": "playing",
+        },
+        {
+            "trigger": "move",
+            "source": "playing",
+            "dest": "playing",
+        },
+        {
+            "trigger": "move",
+            "source": "playing",
+            "dest": "win",
+        },
+        {
+            "trigger": "move",
+            "source": "playing",
+            "dest": "lose",
+        },
+        {
+            "trigger": "quit",
+            "source": "new game",
+            "dest": "quit",
+        },
+        {
+            "trigger": "quit",
+            "source": "new game",
+            "dest": "quit",
+        },
+        {
+            "trigger": "quit",
+            "source": "playing",
+            "dest": "quit",
+        },
+        {
+            "trigger": "quit",
+            "source": "playing",
+            "dest": "quit",
+        },
+        {
+            "trigger": "quit",
+            "source": "win",
+            "dest": "quit",
+        },
+        {
+            "trigger": "quit",
+            "source": "lose",
+            "dest": "quit",
+        },
     ],
-    initial="user",
+    initial="new game",
     auto_transitions=False,
     show_conditions=True,
 )
+
 
 app = Flask(__name__, static_url_path="")
 
