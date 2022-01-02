@@ -76,10 +76,10 @@ def callback():
             player = message
         if message == 'play black':
             f = open('input.txt', 'w')
-            f.write('1 shosboard') 
+            f.write('q') 
             f.close()
             print('before exec')
-            os.system('./gnugo --mode gtp < input.txt > output.txt')
+            os.system('python gobang.py < input.txt > output.txt')
             print('after exec')
             f = open('output.txt', 'r')
             result = f.readlines()
